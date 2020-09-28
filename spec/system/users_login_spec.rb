@@ -16,7 +16,7 @@ RSpec.describe 'UsersLogin', type: :system do
     fill_in 'ユーザー名', with: ''
     fill_in 'パスワード', with: 'hogehoge'
     click_button 'ログイン'
-    expect(page).to have_current_path login_path
+    expect(page).to have_current_path '/login'
     expect(page).to have_content 'ユーザ名またはパスワードが違います'
   end
 
@@ -24,7 +24,7 @@ RSpec.describe 'UsersLogin', type: :system do
     fill_in 'ユーザー名', with: 'testname'
     fill_in 'パスワード', with: ''
     click_button 'ログイン'
-    expect(page).to have_current_path login_path
+    expect(page).to have_current_path '/login'
     expect(page).to have_content 'ユーザ名またはパスワードが違います'
   end
 
@@ -32,7 +32,7 @@ RSpec.describe 'UsersLogin', type: :system do
     fill_in 'ユーザー名', with: 'testname2'
     fill_in 'パスワード', with: 'hogehoge'
     click_button 'ログイン'
-    expect(page).to have_current_path login_path
+    expect(page).to have_current_path '/login'
     expect(page).to have_content 'ユーザ名またはパスワードが違います'
   end
 
@@ -40,7 +40,7 @@ RSpec.describe 'UsersLogin', type: :system do
     fill_in 'ユーザー名', with: 'testname'
     fill_in 'パスワード', with: 'foobar'
     click_button 'ログイン'
-    expect(page).to have_current_path login_path
+    expect(page).to have_current_path '/login'
     expect(page).to have_content 'ユーザ名またはパスワードが違います'
   end
 end
