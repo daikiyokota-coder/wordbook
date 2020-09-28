@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_to root_path, notice: 'ログインしました'
     else
       flash.now[:danger] = 'ユーザ名またはパスワードが違います'
-      render :new    
+      render :new
     end
   end
 
