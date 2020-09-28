@@ -1,0 +1,11 @@
+<% if notice.present? %>
+  <p class="alert alert-success"><%= notice %></p>
+<% elsif alert.present? %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% else %>
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
