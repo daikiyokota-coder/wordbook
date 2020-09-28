@@ -38,6 +38,11 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
+    end
+  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
