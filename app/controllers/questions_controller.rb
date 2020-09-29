@@ -30,6 +30,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    @question = Question.find(params[:id])
+    if @question.destroy
+      redirect_to questions_path, notice: '単語を削除しました'
+    else
+      redirect_to root_url
+    end
+  end
+
   private
 
   def question_params
