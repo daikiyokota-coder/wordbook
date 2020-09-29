@@ -1,0 +1,12 @@
+<%= form_for(@question, url: { controller: 'questions', action: 'update' }) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <div class="form-group">
+    <%= f.label :question, '単語' %>
+    <%= f.text_field :question, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, '説明' %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+  <%= f.submit '更新する', class: 'btn btn-primary form-control' %>
+<% end %>
