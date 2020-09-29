@@ -1,2 +1,11 @@
 <h1>単語メンテナンス</h1>
 <p><%= link_to '単語作成', new_question_path %></p>
+<div>
+  <table border="1">
+    <tr>
+      <th>単語</th>
+      <th>説明</th>
+    </tr>
+    <%= render @questions %>
+  </table>
+</div>
