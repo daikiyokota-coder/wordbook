@@ -1,11 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'QuestionsCreate', type: :system do
   before do
-    create(:user, name: 'testname')
-    visit login_path
-    fill_in 'ユーザー名', with: 'testname'
-    fill_in 'パスワード', with: 'hogehoge'
-    click_button 'ログイン'
+    make_user_and_login
     visit new_question_path
   end
 
