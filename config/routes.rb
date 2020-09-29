@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root 'menus#home'
   resources :users, :only => [:new, :create]
-  resources :questions
+  resources :questions do
+    collection do
+      get :search
+    end
+  end
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

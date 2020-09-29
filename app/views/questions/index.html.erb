@@ -1,14 +1,5 @@
 <h1>単語メンテナンス</h1>
+<%= render 'search_form' %>
 <p><%= link_to '単語作成', new_question_path %></p>
-<div>
-  <table border="1">
-    <tr>
-      <th>単語</th>
-      <th>説明</th>
-      <th>編集</th>
-      <th>削除</th>
-    </tr>
-    <%= render @questions %>
-  </table>
-</div>
+<%= render 'questions_table' %>
 <p><%= link_to 'メニューに戻る', root_path %></p>

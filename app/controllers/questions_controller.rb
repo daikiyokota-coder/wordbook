@@ -1,5 +1,10 @@
 class QuestionsController < ApplicationController
   before_action :require_login
+
+  def search
+    @questions = Question.where('question like ?', "%#{params[:search]}%")
+  end
+
   def index
     @questions = Question.all
   end
