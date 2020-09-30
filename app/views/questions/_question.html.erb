@@ -3,4 +3,5 @@
   <td><%= question.description %></td>
   <td><%= link_to '編集する', edit_question_path(question) %></td>
   <td><%= link_to '削除する', "/questions/#{question.id}", method: :delete, data: {confirm: "単語を本当に削除しますか？"} %></td>
+  <td><%= link_to '類義語を追加', new_question_question_similar_path(question) %></td>
 </tr>
