@@ -1,2 +1,13 @@
 <h1><%= @question.question %></h1>
 <p><%= @question.description %></p>
+<div>
+  <p>[類義語]</p>
+  <% @question.question_similars.each do |question_similar| %>
+    <p>
+      <%= question_similar.similar_word %>
+      |<%= link_to '削除する', question_question_similar_path(question_similar), method: :delete, data: {confirm: "類義語を本当に削除しますか？"} %>
+    </p>
+  <% end %>
+</div>
+<p><%= link_to '類義語を作成', new_question_question_similar_path(@question) %></p>
+<p><%= link_to 'メニューに戻る', root_path %></p>
