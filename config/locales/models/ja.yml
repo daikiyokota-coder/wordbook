@@ -2,8 +2,12 @@ ja:
   activerecord:
     models:
       user : ユーザー
+      question : 単語
     attributes:
         user:
           name: 名前
           password: パスワード
           password_confirmation: 確認用パスワード
+        question:
+          question: 単語
+          description: 説明

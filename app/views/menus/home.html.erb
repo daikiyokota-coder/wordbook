@@ -1,8 +1,13 @@
 <h1>Menus#home</h1>
 <p>Find me in app/views/menus/home.html.erb</p>
 <% if logged_in? %>
-  <p><%= link_to 'ログアウト', logout_path, method: :delete %></p>
+  <ul>
+    <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+    <li><%= link_to '単語マスタメンテナンス', questions_path %></li>
+  </ul>
 <% else %>
-  <p><%= link_to 'ログイン', login_path %></p>
-  <p><%= link_to '新規登録', new_user_path %></p>
+  <ul>
+    <li><%= link_to 'ログイン', login_path %></li>
+    <li><%= link_to '新規登録', new_user_path %></li>
+  </ul>
 <% end %>
