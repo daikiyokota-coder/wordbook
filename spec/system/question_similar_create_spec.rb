@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'QuestionsCreate', type: :system do
+RSpec.describe 'QuestionSimilarCreate', type: :system do
   before do
     make_user_and_login
     @question = create(:question)

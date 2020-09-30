@@ -5,7 +5,7 @@
   <% @question.question_similars.each do |question_similar| %>
     <p>
       <%= question_similar.similar_word %>
-      |<%= link_to '削除する', question_question_similar_path(question_similar), method: :delete, data: {confirm: "単語を本当に削除しますか？"} %>
+      |<%= link_to '削除する', question_question_similar_path(question_similar), method: :delete, data: {confirm: "類義語を本当に削除しますか？"} %>
     </p>
   <% end %>
 </div>
