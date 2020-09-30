@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'menus#home'
   resources :users, :only => [:new, :create]
+  resources :question_similar, :only => [:new, :create, :destroy]
   resources :questions do
     collection do
       get :search
