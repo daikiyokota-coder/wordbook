@@ -1,0 +1,10 @@
+<h1>類義語作成</h1>
+<%= form_for(@question_similar, url: { controller: 'question_similar', action: 'create' }) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <%= f.hidden_field :question_id, :value => params[:id] %>
+  <div class="form-group">
+    <%= f.label :similar_word, '類義語' %>
+    <%= f.text_field :similar_word, class: "form-control" %>
+  </div>
+  <%= f.submit '作成', class: 'btn btn-primary form-control' %>
+<% end %>

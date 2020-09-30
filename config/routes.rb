@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'menus#home'
   resources :users, :only => [:new, :create]
-  resources :question_similar, :only => [:new, :create, :destroy]
   resources :questions do
+    resources :question_similar, :only => [:new, :create, :destroy]
     collection do
       get :search
     end

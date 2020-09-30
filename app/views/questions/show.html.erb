@@ -1,2 +1,3 @@
 <h1><%= @question.question %></h1>
 <p><%= @question.description %></p>
+<p><%= link_to '類義語を作成', new_question_question_similar_path(@question) %></p>
