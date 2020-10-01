@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_09_30_062957) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "question_similars", force: :cascade do |t|
     t.integer "question_id"
     t.string "similar_word"
