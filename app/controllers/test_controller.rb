@@ -1,5 +1,6 @@
 class TestController < ApplicationController
   before_action :require_login
+  before_action :no_questions
 
   def new
     session[:correct] = 0
@@ -20,5 +21,13 @@ class TestController < ApplicationController
     puts params[:correct_question_id]
     puts params[:question_description_id]
     redirect_to root_path
+  end
+
+  private
+
+  def no_questions
+    if !Question.exists?
+      redirect_to root_path, alert: '単語を作成してください'
+    end
   end
 end
