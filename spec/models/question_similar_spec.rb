@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe QuestionSimilar, type: :model do
   before do
-    create(:question)
-    @question_similar = build(:question_similar)
+    @question = create(:question)
+    @question_similar = build(:question_similar, question_id: @question.id)
   end
 
   describe 'バリデーション' do

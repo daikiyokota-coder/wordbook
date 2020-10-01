@@ -2,8 +2,8 @@ require 'rails_helper'
 RSpec.describe 'QuestionSimilarDestroy', type: :system do
   before do
     make_user_and_login
-    @question = create(:question)
-    create(:question_similar)
+    @question = create(:question, question: 'test')
+    create(:question_similar, question_id: @question.id)
     visit question_path(@question)
   end
 
