@@ -5,6 +5,7 @@ class TestController < ApplicationController
   def new
     session[:correct] = 0
     session[:incorrect] = 0
+    session[:number] = 1
     questions = Question.all
     @question = questions.order("RANDOM()").first
     questions -= [@question]
@@ -18,6 +19,7 @@ class TestController < ApplicationController
     else
       session[:incorrect] += 1
     end
+    session[:number] += 1
     puts params[:correct_question_id]
     puts params[:question_description_id]
     redirect_to root_path
