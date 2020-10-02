@@ -8,7 +8,7 @@ class TestController < ApplicationController
     session[:incorrect] = 0
     session[:number] = 1
     session[:question_ids] = []
-    @number_of_questions = 3
+    @number_of_questions = 5
     questions = Question.all
     @question = questions.order("RANDOM()").first
     questions -= [@question]
@@ -23,9 +23,15 @@ class TestController < ApplicationController
       session[:incorrect] += 1
     end
     session[:number] += 1
-    @number_of_questions = 3
+    @number_of_questions = 5
     # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
     if (@number_of_questions + 1) == session[:number]
+      # 自分の最高正解率よりも高い場合はその正解率をcurrent_userのhighest_rateに保存する!!!!
+      rate = ((session[:correct] / 5.to_f) * 100).floor
+      puts rate
+      puts 'rateあたいはいってる？'
+      @user = User.find(current_user.id)
+      @user.update(highest_rate: rate.to_i)
       respond_to do |format|
         format.js { render ajax_redirect_to(ranking_test_index_path) }
       end
