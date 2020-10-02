@@ -1,4 +1,5 @@
 class TestController < ApplicationController
+  include AjaxHelper
   before_action :require_login
   before_action :no_questions
 
@@ -7,6 +8,7 @@ class TestController < ApplicationController
     session[:incorrect] = 0
     session[:number] = 1
     session[:question_ids] = []
+    @number_of_questions = 3
     questions = Question.all
     @question = questions.order("RANDOM()").first
     questions -= [@question]
@@ -21,6 +23,13 @@ class TestController < ApplicationController
       session[:incorrect] += 1
     end
     session[:number] += 1
+    @number_of_questions = 3
+    # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
+    if (@number_of_questions + 1) == session[:number]
+      respond_to do |format|
+        format.js { render ajax_redirect_to(ranking_test_index_path) }
+      end
+    end
     # 既出の単語のidを保存している
     session[:question_ids] << params[:correct_question_id]
     # 単語の集合から既出の単語を削除している
