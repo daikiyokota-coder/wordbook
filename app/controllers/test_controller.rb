@@ -52,6 +52,7 @@ class TestController < ApplicationController
   end
 
   def ranking
+    @rate = ((session[:correct] / 5.to_f) * 100).floor
   end
 
   private
