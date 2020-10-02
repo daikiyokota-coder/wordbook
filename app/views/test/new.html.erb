@@ -1,15 +1,15 @@
 <h1>単語帳</h1>
 <p>第<%= session[:number] %>問(全n問)</p>
-<p>問題: <%= @question.question %></p>
+<p id="updated_by_ajax">問題: <%= @question.question %></p>
 <p>[類義語]</p>
 <ul>
   <% @question.question_similars.each do |question_similar| %>
     <li><%= question_similar.similar_word %></li>
   <% end %>
 </ul>
-<div>
+<div id="request_ajax_update">
   <p>解答</p>
-  <%= form_tag(test_index_path, :method => 'post') do %>
+  <%= form_tag(test_index_path, :method => 'post', :remote => true) do %>
     <%= hidden_field_tag :correct_question_id, @question.id %>
     <% @question_descriptions.each do |question_description| %>
       <%= radio_button_tag(:question_description_id, "#{question_description.id}") %>

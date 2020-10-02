@@ -20,9 +20,6 @@ class TestController < ApplicationController
       session[:incorrect] += 1
     end
     session[:number] += 1
-    puts params[:correct_question_id]
-    puts params[:question_description_id]
-    redirect_to root_path
   end
 
   private
