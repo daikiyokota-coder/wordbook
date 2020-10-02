@@ -1,0 +1,19 @@
+<div id="request_ajax_update" >
+  <%= form_tag(ajax_test_update_path, method: :post, remote: true) do %>
+    <%= text_field :data, :text %>
+    <%= submit_tag 'Post AJAX' %>
+  <% end %>
+</div>
+
+<hr>
+
+<div id="updated_by_ajax" >
+  DEFAULT
+</div>
+
+<hr>
+<!-- ↓ 追加 -->
+<%= javascript_pack_tag 'ajax_test' %>
+<script>
+  register_callback();
+</script>

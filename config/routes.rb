@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'menus#home'
+  get  'ajax_test/top',    to: 'ajax_test#top',    as: 'ajax_test_top'
+  post 'ajax_test/update', to: 'ajax_test#update', as: 'ajax_test_update'
   resources :users, :only => [:new, :create]
   resources :test, :only => [:new, :create]
   resources :questions do
