@@ -1,20 +1,4 @@
 <h1>単語帳</h1>
 <p>第<%= session[:number] %>問(全n問)</p>
-<p id="updated_by_ajax">問題: <%= @question.question %></p>
-<p>[類義語]</p>
-<ul>
-  <% @question.question_similars.each do |question_similar| %>
-    <li><%= question_similar.similar_word %></li>
-  <% end %>
-</ul>
-<div>
-  <p>解答</p>
-  <%= form_tag(test_index_path, :method => 'post', :remote => true) do %>
-    <%= hidden_field_tag :correct_question_id, @question.id %>
-    <% @question_descriptions.each do |question_description| %>
-      <%= radio_button_tag(:question_description_id, "#{question_description.id}") %>
-      <%= label_tag("#{question_description.id}", "#{question_description.description}") %><br>
-    <% end %>
-    <%= submit_tag 'OK' %>
-  <% end %>
-</div>
+<%= render 'test/ajax_partial', question: @question, question_descriptions: @question_descriptions %>
+<%= link_to 'メニューに戻る', root_path %>

@@ -22,6 +22,9 @@ class TestController < ApplicationController
     session[:number] += 1
     questions = Question.all
     @question = questions.order("RANDOM()").first
+    questions -= [@question]
+    incorrect_questions = questions.sample(2)
+    @question_descriptions = incorrect_questions + [@question]
   end
 
   private
