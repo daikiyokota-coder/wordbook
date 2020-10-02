@@ -20,6 +20,8 @@ class TestController < ApplicationController
       session[:incorrect] += 1
     end
     session[:number] += 1
+    questions = Question.all
+    @question = questions.order("RANDOM()").first
   end
 
   private

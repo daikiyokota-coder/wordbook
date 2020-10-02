@@ -7,7 +7,7 @@
     <li><%= question_similar.similar_word %></li>
   <% end %>
 </ul>
-<div id="request_ajax_update">
+<div>
   <p>解答</p>
   <%= form_tag(test_index_path, :method => 'post', :remote => true) do %>
     <%= hidden_field_tag :correct_question_id, @question.id %>
