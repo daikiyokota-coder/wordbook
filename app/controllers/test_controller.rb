@@ -31,7 +31,7 @@ class TestController < ApplicationController
       puts rate
       puts 'rateあたいはいってる？'
       @user = User.find(current_user.id)
-      @user.update(highest_rate: rate.to_i)
+      @user.update(highest_rate: rate.to_i) if rate > @user.highest_rate
       respond_to do |format|
         format.js { render ajax_redirect_to(ranking_test_index_path) }
       end
