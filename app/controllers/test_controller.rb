@@ -36,6 +36,9 @@ class TestController < ApplicationController
     @question_descriptions = incorrect_questions + [@question]
   end
 
+  def ranking
+  end
+
   private
 
   def no_questions
