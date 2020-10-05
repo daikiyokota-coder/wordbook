@@ -53,10 +53,11 @@ class TestController < ApplicationController
 
   def ranking
     @rate = ((session[:correct] / 5.to_f) * 100).floor
+    @users = User.order(highest_rate: "DESC")
     # user = User.find(current_user.id)
     # users = User.where.not(highest_rate: 0, name: user.name)
     # user[:highest_rate] = @rate
-    # users << user
+    # users = users.to_a << user
     # @users = users.order(highest_rate: "DESC")
   end
 
