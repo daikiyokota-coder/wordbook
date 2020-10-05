@@ -38,6 +38,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem 'spring-commands-rspec'
+  gem 'bullet'
 end
 
 group :development do
