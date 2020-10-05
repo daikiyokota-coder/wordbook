@@ -19,10 +19,9 @@ class TestController < ApplicationController
     else
       session[:incorrect] += 1
     end
-    session[:number] += 1
     @number_of_questions = 5
     # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
-    if (@number_of_questions + 1) == session[:number]
+    if (@number_of_questions) == session[:number]
       rate = ((session[:correct] / 5.to_f) * 100).floor
       @user = current_user
       @user.update(highest_rate: rate) if rate > @user.highest_rate
@@ -33,6 +32,7 @@ class TestController < ApplicationController
     # 既出の単語のidを保存している
     session[:question_ids] << params[:correct_question_id]
     make_three_choices
+    session[:number] += 1
   end
 
   def ranking
@@ -54,7 +54,7 @@ class TestController < ApplicationController
   def make_three_choices
     questions = Question.all
     if session[:number] == 1
-      @question = questions.order("RANDOM()").first
+      @question = questions[rand(questions.count)]
     else
       destroy_questions = session[:question_ids].map { |n| Question.find(n.to_i) }
       questions -= destroy_questions
@@ -62,6 +62,7 @@ class TestController < ApplicationController
       questions = Question.all    
     end
     questions -= [@question]
+    # rand関数で2つランダムで抜き出すの難しいのでsampleメソッドを使ってます。
     incorrect_questions = questions.sample(2)
     @question_descriptions = (incorrect_questions + [@question]).shuffle
   end
