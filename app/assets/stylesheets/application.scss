@@ -18,3 +18,18 @@
  ul {
   list-style: none;
  }
+
+ .test_result{
+   border: 1px solid gray;
+   padding: 30px;
+   margin-bottom: 50px;
+ }
+
+ .ranking li{
+   margin-bottom: 30px;
+ }
+
+ .record{
+    display: flex;
+    justify-content: space-between;
+ }

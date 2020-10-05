@@ -3,7 +3,7 @@
 <% if logged_in? %>
   <ul>
     <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-    <li><%= link_to 'テスト', new_test_path %>
+    <li><%= link_to '単語帳', new_test_path %>
     <li><%= link_to 'ランキング', ranking_test_index_path %></li>
     <li><%= link_to '単語マスタメンテナンス', questions_path %></li>
   </ul>
@@ -13,5 +13,3 @@
     <li><%= link_to '新規登録', new_user_path %></li>
   </ul>
 <% end %>
-<p>正解数<%= session[:correct] %></p>
-<p>不正解数<%= session[:incorrect] %></p>
