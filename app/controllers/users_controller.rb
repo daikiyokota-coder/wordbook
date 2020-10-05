@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :session_number_to_zero
   def new
     @user = User.new
   end
