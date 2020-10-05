@@ -23,7 +23,6 @@ class TestController < ApplicationController
     @number_of_questions = 5
     # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
     if (@number_of_questions + 1) == session[:number]
-      # 自分の最高正解率よりも高い場合はその正解率をcurrent_userのhighest_rateに保存する!!!!
       rate = ((session[:correct] / 5.to_f) * 100).floor
       @user = current_user
       @user.update(highest_rate: rate) if rate > @user.highest_rate
@@ -56,19 +55,14 @@ class TestController < ApplicationController
     questions = Question.all
     if session[:number] == 1
       @question = questions.order("RANDOM()").first
-      questions -= [@question]
-      incorrect_questions = questions.sample(2)
-      @question_descriptions = (incorrect_questions + [@question]).shuffle
     else
       destroy_questions = session[:question_ids].map { |n| Question.find(n.to_i) }
       questions -= destroy_questions
-      # 残った単語の集合から出題する問題を抜き出す
       @question = questions.sample
-      # 3択の残り2つを抜き出す
-      questions = Question.all
-      questions -= [@question]
-      incorrect_questions = questions.sample(2)
-      @question_descriptions = (incorrect_questions + [@question]).shuffle
+      questions = Question.all    
     end
+    questions -= [@question]
+    incorrect_questions = questions.sample(2)
+    @question_descriptions = (incorrect_questions + [@question]).shuffle
   end
 end
