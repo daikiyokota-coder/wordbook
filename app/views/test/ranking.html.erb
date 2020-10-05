@@ -1,0 +1,19 @@
+<h1>Ranking</h1>
+<% if session[:number] == 6 %>
+  <div>
+    <p>テストお疲れ様でした。</p>
+    <p>あなたの成績は、5問中 <%= session[:correct] %>問正解　正答率<%= @rate %>%で<%= @your_rank %>位でした</p>
+  </div>
+<% end %>
+<div>
+  <ul>
+    <% @users.each_with_index do |user, i| %>
+      <% if user.id == current_user.id %>
+        <li style="color:red;"><%= i + 1 %>位,<%= user.name %>,<%= user.highest_rate %>%</li>
+      <% else %>
+        <li><%= i + 1 %>位,<%= user.name %>,<%= user.highest_rate %>%</li>
+      <% end %>
+    <% end %>
+  </ul>  
+</div>
+<%= link_to 'メニューに戻る', root_path %>

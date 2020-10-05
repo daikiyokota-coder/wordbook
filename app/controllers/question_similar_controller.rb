@@ -1,5 +1,6 @@
 class QuestionSimilarController < ApplicationController
   before_action :require_login
+  before_action :session_number_to_zero
   def new
     @question_similar = QuestionSimilar.new
   end

@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :require_login
+  before_action :session_number_to_zero
 
   def search
     @questions = Question.where('question ilike ?', "%#{params[:search]}%")
