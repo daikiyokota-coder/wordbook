@@ -10,11 +10,7 @@ class TestController < ApplicationController
     session[:number] = 1
     session[:question_ids] = []
     @number_of_questions = 5
-    questions = Question.all
-    @question = questions.order("RANDOM()").first
-    questions -= [@question]
-    incorrect_questions = questions.sample(2)
-    @question_descriptions = (incorrect_questions + [@question]).shuffle
+    make_three_choices
   end
 
   def create
@@ -37,17 +33,7 @@ class TestController < ApplicationController
     end
     # 既出の単語のidを保存している
     session[:question_ids] << params[:correct_question_id]
-    # 単語の集合から既出の単語を削除している
-    questions = Question.all
-    destroy_questions = session[:question_ids].map { |n| Question.find(n.to_i) }
-    questions -= destroy_questions
-    # 残った単語の集合から出題する問題を抜き出す
-    @question = questions.sample
-    # 3択の残り2つを抜き出す
-    questions = Question.all
-    questions -= [@question]
-    incorrect_questions = questions.sample(2)
-    @question_descriptions = (incorrect_questions + [@question]).shuffle
+    make_three_choices
   end
 
   def ranking
@@ -63,6 +49,26 @@ class TestController < ApplicationController
   def no_questions
     if !Question.exists?
       redirect_to root_path, alert: '単語を作成してください'
+    end
+  end
+
+  def make_three_choices
+    questions = Question.all
+    if session[:number] == 1
+      @question = questions.order("RANDOM()").first
+      questions -= [@question]
+      incorrect_questions = questions.sample(2)
+      @question_descriptions = (incorrect_questions + [@question]).shuffle
+    else
+      destroy_questions = session[:question_ids].map { |n| Question.find(n.to_i) }
+      questions -= destroy_questions
+      # 残った単語の集合から出題する問題を抜き出す
+      @question = questions.sample
+      # 3択の残り2つを抜き出す
+      questions = Question.all
+      questions -= [@question]
+      incorrect_questions = questions.sample(2)
+      @question_descriptions = (incorrect_questions + [@question]).shuffle
     end
   end
 end
