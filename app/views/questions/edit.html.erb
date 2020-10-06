@@ -8,5 +8,12 @@
     <%= f.label :description, '説明' %>
     <%= f.text_area :description, class: "form-control" %>
   </div>
+  <%= f.fields_for :question_similars do |q| %>
+    <div class="form-group">
+      <%= q.label :similar_word, '類義語' %>
+      <%= q.text_field :similar_word, class: "form-control" %>
+      <%= q.hidden_field :id, value: q.object.id %>
+    </div>
+  <% end %>
   <%= f.submit '更新する', class: 'btn btn-primary form-control' %>
 <% end %>

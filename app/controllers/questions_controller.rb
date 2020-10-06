@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-    if @question.update(question_params)
+    if @question.update(question_update_params)
       redirect_to questions_path, notice: '単語を編集しました'
     else
       render 'edit'
@@ -55,5 +55,10 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:question, :description, question_similars_attributes:
       [:similar_word, :question_id])
+  end
+
+  def question_update_params
+    params.require(:question).permit(:question, :description, question_similars_attributes:
+      [:similar_word, :question_id, :_delete, :id])
   end
 end
