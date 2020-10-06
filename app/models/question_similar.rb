@@ -1,11 +1,9 @@
 class QuestionSimilar < ApplicationRecord
-  before_save :blank_to_nil
+  before_save :cancel_save
   belongs_to :question
-  # validates :similar_word, presence: true
-
-  def blank_to_nil
+  def cancel_save
     if similar_word == ""
-      self.similar_word = "#{question.question}の類義語"
+      delete
     end
   end
 end
