@@ -52,14 +52,14 @@ class TestController < ApplicationController
   end
 
   def make_three_choices
-    questions = Question.all
+    questions = Question.all.includes([:question_similars])
     if session[:number] == 1
       @question = questions[rand(questions.count)]
     else
       destroy_questions = session[:asked_question_ids].map { |n| Question.find(n.to_i) }
       questions -= destroy_questions
       @question = questions.sample
-      questions = Question.all
+      questions = Question.all.includes([:question_similars])
     end
     questions -= [@question]
     # rand関数で2つランダムで抜き出すの難しいのでsampleメソッドを使ってます。
