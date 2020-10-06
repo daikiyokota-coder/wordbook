@@ -1,17 +1,30 @@
 <h1>Ranking</h1>
 <% if session[:number] == 6 %>
-  <div>
+  <div class="test_result">
     <p>テストお疲れ様でした。</p>
     <p>あなたの成績は、5問中 <%= session[:correct] %>問正解　正答率<%= @rate %>%で<%= @your_rank %>位でした</p>
   </div>
 <% end %>
-<div>
+<div class="ranking">
   <ul>
-    <% @users.each_with_index do |user, i| %>
+    <li class="record">
+      <div>順位</div>
+      <div>名前</div>
+      <div>正答率</div>
+    </li>
+    <% @users.each_with_index do |user, i| %>   
       <% if user.id == current_user.id %>
-        <li style="color:red;"><%= i + 1 %>位,<%= user.name %>,<%= user.highest_rate %>%</li>
+        <li class="record" style="color:red;">
+          <div><%= i + 1 %>位</div>
+          <div><%= user.name %></div>
+          <div><%= user.highest_rate %>%</div>
+        </li>
       <% else %>
-        <li><%= i + 1 %>位,<%= user.name %>,<%= user.highest_rate %>%</li>
+        <li class="record">
+          <div><%= i + 1 %>位</div>
+          <div><%= user.name %></div>
+          <div><%= user.highest_rate %>%</div>
+        </li>
       <% end %>
     <% end %>
   </ul>  

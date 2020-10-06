@@ -8,7 +8,7 @@ class TestController < ApplicationController
     session[:correct] = 0
     session[:incorrect] = 0
     session[:number] = 1
-    session[:question_ids] = []
+    session[:asked_question_ids] = []
     @number_of_questions = 5
     make_three_choices
   end
@@ -19,10 +19,9 @@ class TestController < ApplicationController
     else
       session[:incorrect] += 1
     end
-    session[:number] += 1
     @number_of_questions = 5
     # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
-    if (@number_of_questions + 1) == session[:number]
+    if @number_of_questions == session[:number]
       rate = ((session[:correct] / 5.to_f) * 100).floor
       @user = current_user
       @user.update(highest_rate: rate) if rate > @user.highest_rate
@@ -31,16 +30,23 @@ class TestController < ApplicationController
       end
     end
     # 既出の単語のidを保存している
-    session[:question_ids] << params[:correct_question_id]
+    session[:asked_question_ids] << params[:correct_question_id]
+    session[:number] += 1
     make_three_choices
   end
 
   def ranking
     @rate = ((session[:correct] / 5.to_f) * 100).floor
     @users = User.order(highest_rate: "DESC")
-    ranked_scores = User.all.order('highest_rate desc').select(:highest_rate).map(&:highest_rate)
+    ranked_scores = User.order(highest_rate: "DESC").
+      select(:highest_rate).map(&:highest_rate)
     ranked_scores = (ranked_scores << @rate).sort.reverse
-    @your_rank = ranked_scores.index(@rate) + 1
+    # 同率の時に順位が変わってしまう問題対策
+    if @rate == current_user.highest_rate
+      @your_rank = @users.index(current_user) + 1
+    else
+      @your_rank = ranked_scores.index(@rate) + 1
+    end
   end
 
   private
@@ -52,16 +58,17 @@ class TestController < ApplicationController
   end
 
   def make_three_choices
-    questions = Question.all
+    questions = Question.all.includes([:question_similars])
     if session[:number] == 1
-      @question = questions.order("RANDOM()").first
+      @question = questions[rand(questions.count)]
     else
-      destroy_questions = session[:question_ids].map { |n| Question.find(n.to_i) }
+      destroy_questions = session[:asked_question_ids].map { |n| Question.find(n.to_i) }
       questions -= destroy_questions
       @question = questions.sample
-      questions = Question.all    
+      questions = Question.all.includes([:question_similars])
     end
     questions -= [@question]
+    # rand関数で2つランダムで抜き出すの難しいのでsampleメソッドを使ってます。
     incorrect_questions = questions.sample(2)
     @question_descriptions = (incorrect_questions + [@question]).shuffle
   end

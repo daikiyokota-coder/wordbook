@@ -6,7 +6,8 @@ class QuestionSimilarController < ApplicationController
   end
 
   def create
-    @question_similar = QuestionSimilar.new(question_similar_params)
+    @question = Question.find(params[:question_id])
+    @question_similar = @question.question_similars.build(question_similar_params)
     if @question_similar.save
       redirect_to questions_path, notice: '類義語を作成しました'
     else
