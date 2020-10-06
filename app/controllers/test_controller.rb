@@ -31,16 +31,22 @@ class TestController < ApplicationController
     end
     # 既出の単語のidを保存している
     session[:asked_question_ids] << params[:correct_question_id]
-    make_three_choices
     session[:number] += 1
+    make_three_choices
   end
 
   def ranking
     @rate = ((session[:correct] / 5.to_f) * 100).floor
     @users = User.order(highest_rate: "DESC")
-    ranked_scores = User.all.order('highest_rate desc').select(:highest_rate).map(&:highest_rate)
+    ranked_scores = User.order(highest_rate: "DESC").
+      select(:highest_rate).map(&:highest_rate)
     ranked_scores = (ranked_scores << @rate).sort.reverse
-    @your_rank = ranked_scores.index(@rate) + 1
+    # 同率の時に順位が変わってしまう問題対策
+    if @rate == current_user.highest_rate
+      @your_rank = @users.index(current_user) + 1
+    else
+      @your_rank = ranked_scores.index(@rate) + 1
+    end
   end
 
   private
