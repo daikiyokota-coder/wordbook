@@ -17,3 +17,4 @@ require ('packs/question.js')
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require cocoon
