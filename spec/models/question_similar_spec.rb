@@ -15,10 +15,5 @@ RSpec.describe QuestionSimilar, type: :model do
       @question_similar.question_id = ''
       expect(@question_similar.valid?).to eq(false)
     end
-
-    it 'similar_wordが設定されていない単語はNG' do
-      @question_similar.similar_word = ''
-      expect(@question_similar.valid?).to eq(false)
-    end
   end
 end
