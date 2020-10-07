@@ -1,4 +1,9 @@
 class QuestionSimilar < ApplicationRecord
+  before_save :cancel_save
   belongs_to :question
-  validates :similar_word, presence: true
+  def cancel_save
+    if similar_word == ""
+      delete
+    end
+  end
 end
