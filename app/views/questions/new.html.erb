@@ -9,9 +9,7 @@
     <%= f.label :description, '説明' %>
     <%= f.text_area :description, class: "form-control" %>
   </div>
-  <p id="question_similar_qlus">類義語を追加+</p>
   <div class="question_similar_form" id="detail-association-insertion-point">
-    <p style="color:orange;">類義語を2つまで一緒に登録できます</p>
     <%= f.fields_for :question_similars do |f| %>
       <%= f.label :similar_word, '類義語' %>
       <%= render 'question_similar_fields', f: f %>      
