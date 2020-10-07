@@ -29,12 +29,5 @@ RSpec.describe 'QuestionSimilarCreate', type: :system do
       expect(page).to have_current_path question_path(@question)
       expect(page).to have_content 'PHP'
     end
-
-    it '類義語を入力せずに作成ボタンを押すと、「類義語を入力してください」とメッセージが表示される' do
-      expect do
-        click_button '作成'
-      end.to change(QuestionSimilar, :count).by(0)
-      expect(page).to have_content '類義語を入力してください'
-    end
   end
 end
