@@ -11,13 +11,13 @@
   </div>
   <p id="question_similar_qlus">類義語を追加+</p>
   <div id="question_similar_form">
-  <p style="color:orange;">類義語を2つまで一緒に登録できます</p>
-  <%= f.fields_for :question_similars do |q| %>
-    <div class="form-group">
-      <%= q.label :similar_word, '類義語' %>
-      <%= q.text_field :similar_word, class: "form-control" %>
-    </div>
-  <% end %>
+    <p style="color:orange;">類義語を2つまで一緒に登録できます</p>
+    <%= f.fields_for :question_similars do |q| %>
+      <div class="form-group">
+        <%= q.label :similar_word, '類義語' %>
+        <%= q.text_field :similar_word, class: "form-control" %>
+      </div>
+    <% end %>
   </div>
   <%= f.submit '作成', class: 'btn btn-primary form-control' %>
 <% end %>
