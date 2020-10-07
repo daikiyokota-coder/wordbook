@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    2.times { @question.question_similars.build }
+    @question.question_similars.build
   end
 
   def create

@@ -9,15 +9,12 @@
     <%= f.label :description, '説明' %>
     <%= f.text_area :description, class: "form-control" %>
   </div>
-  <p id="question_similar_qlus">類義語を追加+</p>
-  <div id="question_similar_form">
-    <p style="color:orange;">類義語を2つまで一緒に登録できます</p>
-    <%= f.fields_for :question_similars do |q| %>
-      <div class="form-group">
-        <%= q.label :similar_word, '類義語' %>
-        <%= q.text_field :similar_word, class: "form-control" %>
-      </div>
+  <div class="question_similar_form" id="detail-association-insertion-point">
+    <%= f.fields_for :question_similars do |f| %>
+      <%= f.label :similar_word, '類義語' %>
+      <%= render 'question_similar_fields', f: f %>      
     <% end %>
+    <p><%= link_to_add_association "追加する", f, :question_similars %></p>
   </div>
   <%= f.submit '作成', class: 'btn btn-primary form-control' %>
 <% end %>
