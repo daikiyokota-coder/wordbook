@@ -12,16 +12,25 @@
       <div>名前</div>
       <div>正答率</div>
     </li>
-    <% @users.each_with_index do |user, i| %>   
+    <% rates_array = [] %>
+    <% rank_array = [] %>
+    <% @users.each_with_index do |user, i| %>
+      <% if rates_array.last == user.highest_rate %>
+        <% i = rank_array.last %>
+      <% else %>
+        <% i = rank_array.count + 1 %>
+      <% end %>
+      <% rates_array << user.highest_rate %>
+      <% rank_array << i %>
       <% if user.id == current_user.id %>
         <li class="record" style="color:red;">
-          <div><%= i + 1 %>位</div>
+          <div><%= i %>位</div>
           <div><%= user.name %></div>
           <div><%= user.highest_rate %>%</div>
         </li>
       <% else %>
         <li class="record">
-          <div><%= i + 1 %>位</div>
+          <div><%= i %>位</div>
           <div><%= user.name %></div>
           <div><%= user.highest_rate %>%</div>
         </li>

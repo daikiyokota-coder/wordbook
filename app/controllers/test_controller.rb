@@ -44,6 +44,10 @@ class TestController < ApplicationController
     # 同率の時に順位が変わってしまう問題対策
     if @rate == current_user.highest_rate
       @your_rank = @users.index(current_user) + 1
+      if current_user.highest_rate == @users[@your_rank - 2].highest_rate
+        rates = @users.map { |n| n.highest_rate }
+        @your_rank = rates.index(current_user.highest_rate) + 1
+      end
     else
       @your_rank = ranked_scores.index(@rate) + 1
     end

@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    p params
     @question = Question.new(question_params)
     if @question.save
       redirect_to questions_path, notice: '単語を作成しました'
