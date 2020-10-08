@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
+    session[:incorrect_question_ids] = []
     redirect_to root_path
   end
 
