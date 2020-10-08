@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :ranking
       get :review
+      post :remain
     end
   end
   resources :questions do

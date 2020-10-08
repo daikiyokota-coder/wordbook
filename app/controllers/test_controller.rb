@@ -9,7 +9,6 @@ class TestController < ApplicationController
     session[:incorrect] = 0
     session[:number] = 1
     session[:asked_question_ids] = []
-    session[:incorrect_question_ids] = []
     @number_of_questions = 5
     make_three_choices
   end
@@ -56,6 +55,11 @@ class TestController < ApplicationController
   end
 
   def review
+    @incorrect_questions = session[:incorrect_question_ids].map { |n| Question.find(n.to_i) }
+  end
+
+  def remain
+    session[:incorrect_question_ids] -= params[:question]
     @incorrect_questions = session[:incorrect_question_ids].map { |n| Question.find(n.to_i) }
   end
 
