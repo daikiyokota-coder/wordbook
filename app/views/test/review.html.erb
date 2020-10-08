@@ -1,11 +1,8 @@
 <h1>復習</h1>
 <p>直近の間違った問題を確認しよう</p>
-<div>
-  <% @incorrect_questions.each do |question| %>
-    <div class="incorrect_question">
-      <div style="color: red;"><%= question.question %></div>
-      <div>:<%= question.description %></div>
-    </div>
-  <% end %>
-</div>
+<% if @incorrect_questions.present? %>
+  <%= render 'test/incorrect_questions', incorrect_questions: @incorrect_questions %>
+<% else %>
+  <p>現在間違った問題はありません!</p>
+<% end %>
 <p><%= link_to 'メニューに戻る', root_path %></p>

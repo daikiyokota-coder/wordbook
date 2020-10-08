@@ -1,0 +1,24 @@
+<div id="incorrect_questions">
+  <%= form_tag(remain_test_index_path, method: :post, remote: true) do %>
+    <table border="1">
+      <tr>
+        <th>単語</th>
+        <th>説明</th>
+        <th>覚えた!</th>
+      </tr>
+      <% incorrect_questions.each do |question| %>
+        <div class="incorrect_question">
+          <tr>
+            <td style="color: red;"><%= question.question %></td>
+            <td><%= question.description %></td>
+            <td>
+              <%= check_box_tag("question[]", question.id) %>
+              <%= label_tag :question, '覚えた!'%>
+            </td>
+          </tr>
+        </div>
+      <% end %>
+    </table>
+    <p><%= submit_tag "確認した" %></p>
+  <% end %>
+</div>
