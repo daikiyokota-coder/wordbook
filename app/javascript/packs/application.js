@@ -18,3 +18,25 @@ import "cocoon-js"
 //= require popper
 //= require bootstrap-sprockets
 //= require cocoon
+$(function(){
+  $(".wordbook").hover(function(){
+    $('.wordbook_description').css('display', 'block');
+  }, function(){
+    $('.wordbook_description').css('display', 'none');
+  })
+  $(".rank").hover(function(){
+    $('.rank_description').css('display', 'block');
+  }, function(){
+    $('.rank_description').css('display', 'none');
+  })
+  $(".maintenance").hover(function(){
+    $('.maintenance_description').css('display', 'block');
+  }, function(){
+    $('.maintenance_description').css('display', 'none');
+  })
+  $(".logout").hover(function(){
+    $('.logout_description').css('display', 'block');
+  }, function(){
+    $('.logout_description').css('display', 'none');
+  })
+});

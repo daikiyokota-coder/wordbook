@@ -14,6 +14,8 @@
  *= require_self
  */
  @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
 
  ul {
   list-style: none;
@@ -42,6 +44,49 @@
    margin-top: 100px;
    border: 1px solid gray;
    padding: 50px;
-   width: 40%;
+   width: 500px;
    background-color: #FFFFEE;
+   margin: 0 auto;
+ }
+
+ i {
+   font-size: 80px;
+ }
+
+ .main_menu{
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  height: 250px;
+ }
+
+ .main_menu a{
+  text-decoration: none;
+  color: #555555;
+ }
+
+ .main_menu li{
+   width: 25%;
+ }
+
+ .main_menu p{
+   margin-top: 20px;
+   color: gray;
+ }
+
+ .wordbook_description{
+   display: none;
+ }
+
+ .rank_description{
+   display: none;
+ }
+
+ .maintenance_description{
+   display: none;
+ }
+
+ .logout_description{
+   display: none;
  }
