@@ -13,3 +13,9 @@
     <li><%= link_to '新規登録', new_user_path %></li>
   </ul>
 <% end %>
+<% if @incorrect_question %>
+  <div class="review_link">
+    <p>「<%= @incorrect_question.question %>」の意味分かりますか?</p>
+    <p>間違った問題の復習は<%= link_to 'こちらから', review_test_index_path %></p>
+  </div>
+<% end %>
