@@ -9,6 +9,7 @@ class TestController < ApplicationController
     session[:incorrect] = 0
     session[:number] = 1
     session[:asked_question_ids] = []
+    session[:incorrect_question_ids] = []
     @number_of_questions = 5
     make_three_choices
   end
@@ -18,6 +19,7 @@ class TestController < ApplicationController
       session[:correct] += 1
     else
       session[:incorrect] += 1
+      session[:incorrect_question_ids] << params[:correct_question_id]
     end
     @number_of_questions = 5
     # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
@@ -51,6 +53,10 @@ class TestController < ApplicationController
     else
       @your_rank = ranked_scores.index(@rate) + 1
     end
+  end
+
+  def review
+    @incorrect_questions = session[:incorrect_question_ids].map { |n| Question.find(n.to_i) }
   end
 
   private

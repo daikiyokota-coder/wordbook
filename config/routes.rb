@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :test, :only => [:new, :create] do
     collection do
       get :ranking
+      get :review
     end
   end
   resources :questions do
