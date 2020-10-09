@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
     end
 
     it '同じ名前のユーザーは作れない' do
-      User.create(name: 'hogehoge', password_digest: 'password')
+      User.create(name: 'hogehoge', password: 'password')
       @user.name = 'hogehoge'
       expect(@user.valid?).to eq(false)
     end
