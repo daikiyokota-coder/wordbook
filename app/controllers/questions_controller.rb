@@ -41,6 +41,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    session[:incorrect_question_ids].delete(@question.id.to_s)
     if @question.destroy
       redirect_to questions_path, notice: '単語を削除しました'
     else
