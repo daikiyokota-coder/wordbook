@@ -9,7 +9,12 @@ class TestController < ApplicationController
     session[:incorrect] = 0
     session[:number] = 1
     session[:asked_question_ids] = []
-    @number_of_questions = 5
+    if Question.all.count < 5
+      @number_of_questions = Question.all.count
+    else
+      @number_of_questions = 5
+    end
+    session[:number_of_questions] = @number_of_questions
     make_three_choices
   end
 
@@ -20,7 +25,11 @@ class TestController < ApplicationController
       session[:incorrect] += 1
       session[:incorrect_question_ids] << params[:correct_question_id]
     end
-    @number_of_questions = 5
+    if Question.all.count < 5
+      @number_of_questions = Question.all.count
+    else
+      @number_of_questions = 5
+    end
     # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
     if @number_of_questions == session[:number]
       rate = ((session[:correct] / 5.to_f) * 100).floor
@@ -66,8 +75,8 @@ class TestController < ApplicationController
   private
 
   def no_questions
-    if !Question.exists?
-      redirect_to root_path, alert: '単語を作成してください'
+    if Question.all.count < 3
+      redirect_to root_path, alert: '単語を最低3つ作成してください'
     end
   end
 
