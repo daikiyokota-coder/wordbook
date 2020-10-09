@@ -1,7 +1,7 @@
 class TestController < ApplicationController
   include AjaxHelper
   before_action :require_login
-  before_action :no_questions
+  before_action :no_questions, only: [:new, :create]
   before_action :session_number_to_zero, only: [:new]
 
   def new
