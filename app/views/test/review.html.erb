@@ -1,0 +1,8 @@
+<h1>復習</h1>
+<p>直近の間違った問題を確認しよう</p>
+<% if @incorrect_questions.present? %>
+  <%= render 'test/incorrect_questions', incorrect_questions: @incorrect_questions %>
+<% else %>
+  <p>現在間違った問題はありません!</p>
+<% end %>
+<p><%= link_to 'メニューに戻る', root_path %></p>

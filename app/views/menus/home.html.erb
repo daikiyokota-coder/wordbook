@@ -1,0 +1,47 @@
+<div class="text-center">
+<h1>メインメニュー</h1>
+<p>下記のメニューよりクリックしてください</p>
+<% if logged_in? %>
+  <ul class="main_menu">
+    <li class="wordbook">
+      <%= link_to  new_test_path do %>
+        <div><i class="fas fa-book"></i></div>
+        <div>単語帳</div>
+        <p class="wordbook_description">作成した単語を覚えているかテストを受けることができます</p>
+      <% end %>
+    </li>
+    <li class="rank">
+      <%= link_to ranking_test_index_path  do %>
+        <div><i class="fas fa-medal"></i></div>
+        <div>ランキング</div>
+        <p class="rank_description">最高正答率でランキングを表示します</p>
+      <% end %>
+    </li>
+    <li class="maintenance">
+      <%= link_to questions_path do %>
+        <div><i class="fas fa-tasks"></i></div>
+        <div>単語マスタメンテナンス</div>
+        <p class="maintenance_description">単語や類義語の作成、編集、削除などができます</p>
+      <% end %>
+    </li>
+    <li class="logout">
+      <%= link_to logout_path, method: :delete do %>
+        <div><i class="fas fa-sign-out-alt"></i></div>  
+        <div>ログアウト</div>
+        <p class="logout_description">ログアウトします</p>
+      <% end %>
+    </li>
+  </ul>
+<% else %>
+  <ul>
+    <li><%= link_to 'ログイン', login_path %></li>
+    <li><%= link_to '新規登録', new_user_path %></li>
+  </ul>
+<% end %>
+<% if @incorrect_question %>
+  <div class="review_link">
+    <p>「<%= @incorrect_question.question %>」の意味分かりますか?</p>
+    <p>間違った問題の復習は<%= link_to 'こちらから', review_test_index_path %></p>
+  </div>
+<% end %>
+</div>

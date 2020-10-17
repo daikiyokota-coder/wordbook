@@ -1,0 +1,10 @@
+<div class="nested-fields">
+  <div class="form-group">
+    <%= f.text_field :similar_word, class: "form-control" %>   
+    <% if f.object.id %>
+      <%= link_to '削除する', question_question_similar_path(question_id: f.object.question_id, id: f.object.id), method: :delete, remote: true %>
+    <% else %>
+      <%= link_to_remove_association '削除', f %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div id="question_edit_form">
+<%= form_for(@question, url: { controller: 'questions', action: 'update' }) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <%= f.hidden_field :update_question_id, :value => @question.id %>
+    <div class="form-group">
+      <%= f.label :question, '単語' %>
+      <%= f.text_field :question, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, '説明' %>
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+    <%= f.fields_for :question_similars do |f| %>
+      <div class="form-group">
+        <%= f.label :similar_word, '類義語' %>
+        <%= render 'question_similar/question_similar_fields', f: f %>
+      </div>
+    <% end %>
+    <p><%= link_to_add_association "追加する", f, :question_similars %></p>
+    <%= f.submit '更新する', class: 'btn btn-primary form-control' %>
+  <% end %>
+</div>

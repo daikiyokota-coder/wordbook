@@ -1,0 +1,6 @@
+<div>
+  <%= form_tag(search_questions_path, :method => 'get') do %>
+    <%= text_field_tag :search,'', id: 'search_form', placeholder: "単語名を入力" %>
+    <%= submit_tag '検索' %>
+  <% end %>
+</div>

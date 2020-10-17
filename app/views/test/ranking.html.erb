@@ -1,0 +1,19 @@
+<h1>Ranking</h1>
+<% if session[:number] == session[:number_of_questions] + 1 %>
+  <div class="test_result">
+    <p>テストお疲れ様でした。</p>
+    <p>あなたの成績は、<%= session[:number_of_questions] %> 問中 <%= session[:correct] %>問正解　正答率<%= @rate %>%で<%= @your_rank %>位でした</p>
+  </div>
+<% end %>
+<div class="ranking">
+  <ul>
+    <li class="record">
+      <div>順位</div>
+      <div>名前</div>
+      <div>正答率</div>
+    </li>
+    <%= render 'test/make_ranking', users: @users %>
+  </ul>  
+</div>
+<p><%= link_to '間違った問題を確認', review_test_index_path %></p>
+<p><%= link_to 'メニューに戻る', root_path %></p>

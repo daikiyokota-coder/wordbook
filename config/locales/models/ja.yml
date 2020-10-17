@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      user : ユーザー
+      question : 単語
+      question_similar: 類義語
+    attributes:
+        user:
+          name: 名前
+          password: パスワード
+          password_confirmation: 確認用パスワード
+        question:
+          question: 単語
+          description: 説明
+        question_similar:
+          similar_word: 類義語
