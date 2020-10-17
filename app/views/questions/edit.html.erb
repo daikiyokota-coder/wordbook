@@ -1,19 +1,2 @@
-<%= form_for(@question, url: { controller: 'questions', action: 'update' }) do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
-  <div class="form-group">
-    <%= f.label :question, '単語' %>
-    <%= f.text_field :question, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description, '説明' %>
-    <%= f.text_area :description, class: "form-control" %>
-  </div>
-  <%= f.fields_for :question_similars do |q| %>
-    <div class="form-group">
-      <%= q.label :similar_word, '類義語' %>
-      <%= q.text_field :similar_word, class: "form-control" %>
-      <%= q.hidden_field :id, value: q.object.id %>
-    </div>
-  <% end %>
-  <%= f.submit '更新する', class: 'btn btn-primary form-control' %>
-<% end %>
+<h1>単語の編集</h1>
+<%= render 'questions/question_edit_form' %>

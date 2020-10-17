@@ -12,7 +12,7 @@
   <div class="question_similar_form" id="detail-association-insertion-point">
     <%= f.fields_for :question_similars do |f| %>
       <%= f.label :similar_word, '類義語' %>
-      <%= render 'question_similar_fields', f: f %>      
+      <%= render 'question_similar/question_similar_fields', f: f %>
     <% end %>
     <p><%= link_to_add_association "追加する", f, :question_similars %></p>
   </div>

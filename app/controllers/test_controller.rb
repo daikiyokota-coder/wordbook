@@ -1,15 +1,16 @@
 class TestController < ApplicationController
   include AjaxHelper
   before_action :require_login
-  before_action :no_questions
+  before_action :no_questions, only: [:new, :create]
   before_action :session_number_to_zero, only: [:new]
+  before_action :define_number_of_questions, only: [:new, :create]
 
   def new
     session[:correct] = 0
     session[:incorrect] = 0
     session[:number] = 1
     session[:asked_question_ids] = []
-    @number_of_questions = 5
+    session[:number_of_questions] = @number_of_questions
     make_three_choices
   end
 
@@ -20,7 +21,6 @@ class TestController < ApplicationController
       session[:incorrect] += 1
       session[:incorrect_question_ids] << params[:correct_question_id]
     end
-    @number_of_questions = 5
     # 出題した問題数が、全問題数と同じになった時ランキング画面に移動
     if @number_of_questions == session[:number]
       rate = ((session[:correct] / 5.to_f) * 100).floor
@@ -66,8 +66,8 @@ class TestController < ApplicationController
   private
 
   def no_questions
-    if !Question.exists?
-      redirect_to root_path, alert: '単語を作成してください'
+    if Question.all.count < 3
+      redirect_to root_path, alert: '単語を最低3つ作成してください'
     end
   end
 
@@ -85,5 +85,13 @@ class TestController < ApplicationController
     # rand関数で2つランダムで抜き出すの難しいのでsampleメソッドを使ってます。
     incorrect_questions = questions.sample(2)
     @question_descriptions = (incorrect_questions + [@question]).shuffle
+  end
+
+  def define_number_of_questions
+    if Question.all.count < 5
+      @number_of_questions = Question.all.count
+    else
+      @number_of_questions = 5
+    end
   end
 end

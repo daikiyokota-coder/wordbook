@@ -17,8 +17,9 @@ class QuestionSimilarController < ApplicationController
 
   def destroy
     @question_similar = QuestionSimilar.find(params[:id])
+    @question = @question_similar.question
     if @question_similar.destroy
-      redirect_to questions_path, notice: '類義語を削除しました'
+      puts '削除されたよー'
     else
       redirect_to root_url
     end
